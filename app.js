@@ -26,43 +26,54 @@ const publicCss = path.join(__dirname, './public');
 app.use(express.static(publicCss));
 
 const db = mysql.createConnection({
-  host: process.env.RDS_HOSTNAME,
-  user: process.env.RDS_USERNAME,
-  password: process.env.RDS_PASSWORD,
-//   database: process.env.RDS_DB_NAME,
+    host: process.env.RDS_HOSTNAME,
+    user: process.env.RDS_USERNAME,
+    password: process.env.RDS_PASSWORD,
 });
 
 db.connect((error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('MySQL connected!');
-    createDatabaseAndTable();
-  }
+    if (error) {
+        console.log(error);
+    } else {
+        console.log('MySQL connected!');
+        createDatabaseAndTable();
+    }
 });
 
+/**
+ * Creates a database and table if they do not already exist.
+ *
+ * @param {string} dbName - The name of the database to be created.
+ * @return {void} This function does not return anything.
+ */
 function createDatabaseAndTable() {
-  const dbName = process.env.RDS_DB_NAME;
+    const dbName = process.env.RDS_DB_NAME;
 
-  db.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``, (err) => {
-    if (err) {
-      console.log('Error creating database:', err);
-    } else {
-      console.log(`Database "${dbName}" created or already exists.`);
-      db.query(`USE \`${dbName}\``, (err) => {
+    db.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``, (err) => {
         if (err) {
-          console.log('Error selecting database:', err);
+            console.log('Error creating database:', err);
         } else {
-          console.log(`Using database "${dbName}".`);
-          createUsersTable();
+            console.log(`Database "${dbName}" created or already exists.`);
+            db.query(`USE \`${dbName}\``, (err) => {
+                if (err) {
+                    console.log('Error selecting database:', err);
+                } else {
+                    console.log(`Using database "${dbName}".`);
+                    createUsersTable();
+                }
+            });
         }
-      });
-    }
-  });
+    });
 }
 
+/**
+ * Creates a table for storing user data if it does not already exist.
+ *
+ * @param {type} - No parameters.
+ * @return {type} - No return value.
+ */
 function createUsersTable() {
-  const createTableQuery = `
+    const createTableQuery = `
     CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
       name VARCHAR(255),
@@ -71,13 +82,13 @@ function createUsersTable() {
     );
   `;
 
-  db.query(createTableQuery, (err) => {
-    if (err) {
-      console.log('Error creating users table:', err);
-    } else {
-      console.log('Users table created or already exists.');
-    }
-  });
+    db.query(createTableQuery, (err) => {
+        if (err) {
+            console.log('Error creating users table:', err);
+        } else {
+            console.log('Users table created or already exists.');
+        }
+    });
 }
 
 
@@ -92,6 +103,11 @@ app.get('/register', (req, res) => {
 
 app.get("/login", (req, res) => {
     res.render("login")
+})
+
+
+app.get("/forgot-password", (req, res) => {
+    res.render("password_forgot")
 })
 
 app.get('/check-email', (req, res) => {
@@ -210,7 +226,7 @@ app.post('/auth/login', async (req, res) => {
         res.status(401).render('login', {
             message: 'Email or Password is incorrect'
         });
-        
+
     }
 
     db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
