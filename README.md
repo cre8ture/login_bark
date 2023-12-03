@@ -3,6 +3,9 @@
 ## Description
 loginpagebark is a Node.js web application for user authentication, featuring a login and registration system. It uses Express.js for handling web routes and API, MySQL for database interactions, and JWT for session management. The server-side HTML rendering is managed with hbs (Handlebars), and user passwords are secured using bcryptjs.
 
+## Demo
+You can find a working demo here: http://ec2-52-87-169-67.compute-1.amazonaws.com:3000/
+
 ## Prerequisites
 Before you begin, ensure you have met the following requirements:
 * You have Node.js and npm installed. See [Node.js](https://nodejs.org/) for installation instructions.
