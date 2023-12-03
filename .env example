@@ -1,0 +1,8 @@
+DATABASE=login_db
+DATABASE_HOST=localhost
+DATABASE_USER=root
+DATABASE_PASSWORD=doodled00
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=3600  # Expires in 1 hour, for example
+JWT_COOKIE_EXPIRES=90 # Cookie expires in 90 days, for example
+PORT=8080

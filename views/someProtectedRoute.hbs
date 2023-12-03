@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/icon.ico" type="image/x-icon">
+    <title>Splat! Fun</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .splat-text, .circle {
+            position: absolute;
+            user-select: none;
+        }
+        .splat-text {
+            font-weight: bold;
+        }
+        .circle {
+            border-radius: 50%;
+        }
+        #logout-button {
+            position: relative; /* Ensure the logout button stays on top */
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <form id="logout-button" action="/logout" method="POST">
+            <h1>Welcome to the splat! Protected Page</h1>
+            <button type="submit">Logout</button>
+        </form>
+        <img src="/assets/splat.svg" style="height: auto; width: 500px" alt="Company Logo" class="company-logo">
+        <div id="splats"></div>
+    </div>
+
+    <script>
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        const splats = document.getElementById('splats');
+
+        function createSplat() {
+            const splat = document.createElement('div');
+            splat.textContent = 'Splat!';
+            splat.className = 'splat-text';
+            splat.style.left = getRandomInt(0, window.innerWidth) + 'px';
+            splat.style.top = getRandomInt(100, window.innerHeight) + 'px'; // Start at 100px to avoid the logout button
+            splat.style.fontSize = getRandomInt(20, 60) + 'px';
+            splat.style.color = `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`;
+            splat.style.transform = 'rotate(' + getRandomInt(-45, 45) + 'deg)';
+            splats.appendChild(splat);
+        }
+
+        function createCircle() {
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            circle.style.left = getRandomInt(0, window.innerWidth) + 'px';
+            circle.style.top = getRandomInt(100, window.innerHeight) + 'px'; // Start at 100px to avoid the logout button
+            const size = getRandomInt(10, 100);
+            circle.style.width = size + 'px';
+            circle.style.height = size + 'px';
+            circle.style.backgroundColor = `rgba(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, 0.5)`;
+            splats.appendChild(circle);
+        }
+
+        setInterval(() => {
+            createSplat();
+            createCircle();
+        }, 1000); // Create new splat and circle every second
+    </script>
+</body>
+</html>
