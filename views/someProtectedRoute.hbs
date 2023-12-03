@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,28 @@
     <title>Splat! Fun</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .splat-text, .circle {
+        .splat-text,
+        .circle {
             position: absolute;
             user-select: none;
         }
+
         .splat-text {
             font-weight: bold;
         }
+
         .circle {
             border-radius: 50%;
         }
+
         #logout-button {
-            position: relative; /* Ensure the logout button stays on top */
+            position: relative;
+            /* Ensure the logout button stays on top */
             z-index: 1000;
         }
     </style>
 </head>
+
 <body>
     <div class="text-center">
         <form id="logout-button" action="/logout" method="POST">
@@ -69,4 +76,5 @@
         }, 1000); // Create new splat and circle every second
     </script>
 </body>
+
 </html>

@@ -207,7 +207,6 @@ app.post("/auth/register", async (req, res) => {
 });
 
 app.get('/someProtectedRoute', verifyToken, (req, res) => {
-    // Your route logic
     return res.render('someProtectedRoute', {
     })
 });
