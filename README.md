@@ -1,4 +1,4 @@
-# splat! login
+# simple login
 
 ## Description
 loginpagebark is a Node.js web application for user authentication, featuring a login and registration system. It uses Express.js for handling web routes and API, MySQL for database interactions, and JWT for session management. The server-side HTML rendering is managed with hbs (Handlebars), and user passwords are secured using bcryptjs.
@@ -17,6 +17,10 @@ Before you begin, ensure you have met the following requirements:
 - **dotenv**: For managing environmental variables securely.
 - **hbs**: For rendering HTML on the server.
 - **Bcryptjs**: For hashing passwords.
+
+## Integrating this into your project
+
+- please find more extensive documentation on how to integrate this into your project in the folder called `documentation`
 
 ## Installation
 
@@ -107,7 +111,7 @@ Before you begin, ensure you have met the following requirements:
 - If you encounter any issues with the Docker containers, check the container logs for more information.
 
 
-## Contributing to splat! login
+## Contributing to simple login
 <!-- Contribution guidelines -->
 - please use this as you please
 - your suggestions are welcome. Make a pull request or message me at bakukai@gmail.com
