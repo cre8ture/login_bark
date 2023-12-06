@@ -27,17 +27,49 @@
             /* Ensure the logout button stays on top */
             z-index: 1000;
         }
+
+        #skills {
+            border-right: 4px solid cadetblue;
+            padding: .2rem;
+            font-size: 2rem;
+            overflow: auto;
+            /* Change this to 'auto' to allow scrolling */
+            white-space: pre-wrap;
+            /* Change this to 'pre-wrap' to honor new lines and wrap text */
+            word-break: break-word;
+            /* Ensures long words do not cause overflow */
+        }
+
+        #info {
+            text-align: left;
+            direction: ltr;
+            padding: 10px;
+        }
+
+        .company-logo {
+            max-width: 100px;
+            /* Max width of the logo */
+            height: auto;
+            /* Maintain aspect ratio */
+            width: auto;
+            /* Adjust width automatically */
+            margin-bottom: 20px;
+            /* Space below the logo */
+        }
     </style>
 </head>
 
 <body>
     <div class="text-center">
         <form id="logout-button" action="/logout" method="POST">
-            <h1>Welcome to the splat! Protected Page</h1>
+            <h1>Welcome to the Protected Pages</h1>
             <button type="submit">Logout</button>
         </form>
-        <img src="/assets/splat.svg" style="height: auto; width: 500px" alt="Company Logo" class="company-logo">
+        <img src="/assets/splat.svg"  alt="Company Logo" class="company-logo">
         <div id="splats"></div>
+        <div id="info">
+            <pre id="skills"></pre>
+        </div>
     </div>
 
     <script>
@@ -70,10 +102,36 @@
             splats.appendChild(circle);
         }
 
-        setInterval(() => {
-            createSplat();
-            createCircle();
-        }, 1000); // Create new splat and circle every second
+
+        // // this allows splats to form on page (just for fun)
+        //setInterval(() => {
+        //  createSplat();
+        //createCircle();
+        //}, 1000); 
+
+        // animate text to appear to be typing animation
+        function animateText(txt) {
+            const textContainer = document.querySelector("#skills");
+            let i = 0;
+            const oneFrame = () => {
+                if (i == txt.length) return;
+                requestAnimationFrame(() => {
+                    textContainer.textContent += txt[i];
+                    i++;
+                    setTimeout(oneFrame, 10);
+                });
+            };
+            setTimeout(oneFrame, 100);
+        }
+
+        animateText(`Steps to integrate this into your project: \n\n1. Integrate the Authorization Module: Import the authorization component into your existing Node.js project.\n
+2. Configure Environment: Set up environment variables or config files in your existing project to store authorization details (like secret keys).\n
+3. Middleware Setup: Implement middleware in your existing project's server file to utilize the authorization component for route protection.\n
+4. Update Routes: Modify your existing routes to include the authorization middleware, ensuring protected routes require valid authentication.\n
+5. Test Integration: Perform tests to ensure that the authorization component is correctly handling authentication and protecting routes.\n
+6. Refactor and Optimize: Refactor code for better efficiency and readability, ensuring seamless integration of the authorization component.\n
+7. Documentation: Update your project's documentation to reflect the changes and how the authorization process works within the application.\n
+`);
     </script>
 </body>
 
