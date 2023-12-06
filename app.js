@@ -115,8 +115,10 @@ app.get('/check-email', (req, res) => {
 
     // Query your database to check if the email exists
     db.query('SELECT email FROM users WHERE email = ?', [email], (err, result) => {
-        if (err) {
-            // Handle error
+        if (err || !result) {
+        
+                console.log('Error:', err, 'Result:', result);
+            
             res.send('Error occurred');
             return;
         }
