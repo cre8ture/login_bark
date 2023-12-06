@@ -1,7 +1,7 @@
 {
-  "name": "loginpagebark",
+  "name": "loginpage",
   "version": "1.0.0",
-  "description": "A login page for Bark using nodeJS",
+  "description": "A login page using nodeJS",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
