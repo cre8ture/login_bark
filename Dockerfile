@@ -10,6 +10,8 @@ COPY package*.json ./
 # Install any needed packages
 RUN npm install
 
+ENV NODE_ENV=production
+
 # Bundle app source inside the Docker image
 COPY . .
 

@@ -4,6 +4,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+          <link rel="icon" href="/assets/icon.ico" type="image/x-icon">
 </head>
 </head>
 <style>
@@ -57,8 +58,7 @@
                         <label for="email-reg" class="form-label">Email</label>
                         <input type="text" class="form-control" id="email-reg" name="email" onkeyup="checkEmail()">
                         <div id="email-feedback" style="color: red;"></div>
-                        {{!-- <div id="feedback-email" class="alert alert-danger mt-4" style="display: none; color:">
-                        </div> --}}
+                      
 
                     </div>
                     <div class="mb-3">
@@ -120,7 +120,7 @@
         const emailInput = document.getElementById('email-reg');
         const feedbackElementPw = document.getElementById('feedback-pw');
         const feedbackElementPwConf = document.getElementById('feedback-pw-confirm');
-        const feedbackElementEmail = document.getElementById('feedback-email');
+        const feedbackElementEmail = document.getElementById('email-feedback');
 
         document.getElementById('togglePassword').addEventListener('click', function (e) {
             const passwordInput = document.getElementById('password-reg');
