@@ -164,7 +164,8 @@ app.post("/auth/register", async (req, res) => {
 
     // Check if email already exists
     db.query('SELECT email FROM users WHERE email = ?', [email], async (err, results) => {
-        if (err) {
+        if (err || !results) {
+
             console.log(err);
             return res.render('register', {
                 message: 'Database error'
