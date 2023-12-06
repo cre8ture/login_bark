@@ -280,3 +280,5 @@ console.log('JWT Expiration Time:', new Date(decodedToken.exp * 1000).toISOStrin
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+module.exports = app;
