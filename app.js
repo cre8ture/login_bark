@@ -192,9 +192,11 @@ app.post("/auth/register", async (req, res) => {
             // If no error, registration is successful
             const userId = result.insertId; // Getting the user's ID
 
+            // Generate a JWT token
             const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
-                expiresIn: process.env.JWT_EXPIRES_IN
+                expiresIn: parseInt(process.env.JWT_EXPIRES_IN)
             });
+            
 
             // Send the token to the client
             res.cookie('jwt', token, {
@@ -262,6 +264,13 @@ app.post('/auth/login', async (req, res) => {
             httpOnly: true
         });
 
+    
+        console.log("parseInt(process.env.JWT_EXPIRES_IN",parseInt(process.env.JWT_EXPIRES_IN) )
+
+        // Decode token to get expiration time
+const decodedToken = jwt.decode(token);
+console.log('Server Time:', new Date().toISOString());
+console.log('JWT Expiration Time:', new Date(decodedToken.exp * 1000).toISOString());
         res.status(200).redirect('/someProtectedRoute');
     });
 });
