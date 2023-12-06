@@ -231,7 +231,7 @@ app.post('/auth/login', async (req, res) => {
     }
 
     db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
-        if (err) {
+        if (err || !results) {
             console.log(err);
         }
 
